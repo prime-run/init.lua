@@ -19,7 +19,7 @@ return {
         'vim',
         'vimdoc',
         'typescript',
-        'tsx', -- for proper JSX support, its always goddamn js
+        'tsx',
         'javascript',
         'python',
         'html',
@@ -40,9 +40,8 @@ return {
       auto_install = true,
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true },
       textobjects = {
         select = {
           enable = true,
@@ -58,13 +57,23 @@ return {
         },
         move = {
           enable = true,
-          goto_next_start = { [']m'] = '@function.outer' },
-          goto_previous_start = { ['[m'] = '@function.outer' },
+          set_jump = true,
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']c'] = '@class.outer',
+            [']i'] = '@indent.outer', -- For indentation-based blocks
+            [']b'] = '@block.outer', -- General block
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[c'] = '@class.outer',
+            ['[i'] = '@indent.outer',
+            ['[b'] = '@block.outer',
+          },
         },
       },
     }
 
-    -- Create custom queries directory structure (everything else is just fine but its always js! and sometimes py XD)
     local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
     parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript', 'tsx' }
   end,

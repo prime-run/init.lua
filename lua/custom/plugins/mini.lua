@@ -1,17 +1,31 @@
 return {
   'echasnovski/mini.nvim',
   config = function()
-    -- Examples:
-    --  - va)  - [V]isually select [A]round [)]paren
-    --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-    --  - ci'  - [C]hange [I]nside [']quote
+    require('mini.jump').setup {
+      delay = {
+        -- just disable them all!
+        highlight = 2500000000,
+        idle_stop = 1000000000,
+      },
+    }
     require('mini.ai').setup { n_lines = 500 }
-
-    -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-    -- - sd'   - [S]urround [D]elete [']quotes
-    -- - sr)'  - [S]urround [R]eplace [)] [']
+    require('mini.bracketed').setup {
+      -- buffer = { suffix = 'b', options = {} },
+      -- comment = { suffix = 'c', options = {} },
+      -- conflict = { suffix = 'x', options = {} },
+      -- diagnostic = { suffix = 'd', options = {} },
+      -- file = { suffix = 'f', options = {} },
+      -- indent = { suffix = 'i', options = {} },
+      jump = { suffix = 'j', options = {} },
+      -- location = { suffix = 'l', options = {} },
+      -- oldfile = { suffix = 'o', options = {} },
+      -- quickfix = { suffix = 'q', options = {} },
+      -- treesitter = { suffix = 't', options = {} },
+      -- undo = { suffix = 'u', options = {} },
+      -- window = { suffix = 'w', options = {} },
+      -- yank = { suffix = 'y', options = {} },
+    }
     require('mini.surround').setup {
-      -- custom surroundings
       custom_surroundings = {
         ['('] = { output = { left = '(', right = ')' } },
         ['['] = { output = { left = '[', right = ']' } },
@@ -25,15 +39,5 @@ return {
         add = 'sa',
       },
     }
-
-    -- local statusline = require 'mini.statusline'
-    -- statusline.setup { use_icons = vim.g.have_nerd_font }
-
-    -- ---@diagnostic disable-next-line: duplicate-set-field
-    -- statusline.section_location = function()
-    --   return '%2l:%-2v'
-    -- end
-
-    --   https://github.com/echasnovski/mini.nvim
   end,
 }

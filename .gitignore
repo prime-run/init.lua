@@ -1,8 +1,8 @@
 tags
-test.sh
 .luarc.json
 nvim
-
+rs-plugs
+rs-plugs/
 *.tmp
-spell/
 lazy-lock.json
+rs-plugs
