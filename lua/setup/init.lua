@@ -110,3 +110,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+vim.keymap.set('n', '<leader>gt', '<cmd>Telescope git_status<CR>', { desc = '[T]elescope [g]it [s]tatus' })
