@@ -1,6 +1,9 @@
 require 'setup'
 
---NOTE: [[ Install `lazy.nvim` plugin manager ]]
+-- vim.api.nvim_create_user_command('RunMyCmd', function(opts)
+--   vim.cmd('!' .. table.concat(opts.fargs, ' '))
+-- end, { nargs = '+' })
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -114,6 +117,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           previewer = false,
+          windblend = 1,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 

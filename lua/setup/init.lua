@@ -79,15 +79,13 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', '<leader>rep', function()
-  local replacement = vim.fn.escape(vim.fn.getreg '.', '/\\&') -- Use LAST INSERTED TEXT (.)
+  local replacement = vim.fn.escape(vim.fn.getreg '.', '/\\&')
   vim.cmd('keeppatterns %s//' .. replacement .. '/g')
 end, { desc = 'Replace all with last change' })
 
@@ -102,7 +100,6 @@ end, { desc = 'Color Rose-pine' })
 --replace them ffs that messes up the damn pp in v mode!
 vim.keymap.set('i', '<C-c>', '<C-[><Esc>', { noremap = true })
 
--- Highlight when yanking
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -110,4 +107,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-vim.keymap.set('n', '<leader>gt', '<cmd>Telescope git_status<CR>', { desc = '[T]elescope [g]it [s]tatus' })
+vim.keymap.set('n', '<leader>gs', '<cmd>Telescope git_status<CR>', { desc = '[T]elescope [g]it [s]tatus' })
+vim.keymap.set('n', ';', ':')
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding-bottom=0' }, {
+      -- padding-left , padding-bottom, margin-*, etc... also can be passed
+      detach = true,
+      -- detach to make sure it doesn’t interfere with nvim
+    })
+  end,
+})
+vim.api.nvim_create_autocmd('VimLeave', {
+  callback = function()
+    vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding=default' }, {
+      --- reset on exit, (default is 25)
+      detach = true,
+    })
+  end,
+})
