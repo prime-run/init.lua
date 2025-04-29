@@ -127,3 +127,6 @@ vim.api.nvim_create_autocmd('VimLeave', {
     })
   end,
 })
+
+vim.cmd [[autocmd BufRead,BufNewFile .zshenv set filetype=sh]]
+vim.cmd [[autocmd BufRead,BufNewFile .zshrc set filetype=sh]]
