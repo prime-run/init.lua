@@ -64,10 +64,10 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 
-vim.keymap.set('i', '<M-h>', '<Left>', { noremap = true })
-vim.keymap.set('i', '<M-j>', '<Down>', { noremap = true })
-vim.keymap.set('i', '<M-k>', '<Up>', { noremap = true })
-vim.keymap.set('i', '<M-l>', '<Right>', { noremap = true })
+-- vim.keymap.set('i', '<M-h>', '<Left>', { noremap = true })
+-- vim.keymap.set('i', '<M-j>', '<Down>', { noremap = true })
+-- vim.keymap.set('i', '<M-k>', '<Up>', { noremap = true })
+-- vim.keymap.set('i', '<M-l>', '<Right>', { noremap = true })
 
 vim.keymap.set('i', '<M-CR>', '<Esc>o<UP>', { noremap = true, silent = true })
 
@@ -78,6 +78,8 @@ vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+vim.keymap.set('x', '<leader>p', [["_dP]])
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
