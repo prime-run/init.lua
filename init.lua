@@ -44,6 +44,7 @@ require('lazy').setup {
           file_ignore_patterns = {
             'node_modules',
             'venv',
+            '.git',
           },
           --   },
         },
