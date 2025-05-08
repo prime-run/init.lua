@@ -116,10 +116,20 @@ require('lazy').setup {
       end, { desc = 'Jump to second most recent buffer' })
 
       vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        -- builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        --   previewer = false,
+        --   windblend = 1,
+        -- })
+        builtin.current_buffer_fuzzy_find {
+          layout_strategy = 'vertical',
+          sorting_strategy = 'ascending',
+          layout_config = {
+            width = 0.7, -- 80% of the screen width
+            height = 0.7, -- 80% of the screen height
+            prompt_position = 'top',
+          },
           previewer = false,
-          windblend = 1,
-        })
+        }
       end, { desc = '[/] Fuzzily search in current buffer' })
 
       vim.keymap.set('n', '<leader>s/', function()
@@ -231,21 +241,33 @@ require('lazy').setup {
         severity_sort = true,
       }
 
-      vim.api.nvim_create_autocmd('CursorHold', {
-        callback = function()
-          local opts = {
-            focusable = false,
-            close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-            border = 'rounded',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-          }
-          vim.diagnostic.open_float(nil, opts)
-        end,
-      })
+      -- vim.api.nvim_create_autocmd('CursorHold', {
+      --   callback = function()
+      --     local opts = {
+      --       focusable = false,
+      --       close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+      --       border = 'rounded',
+      --       source = 'always',
+      --       prefix = ' ',
+      --       scope = 'cursor',
+      --     }
+      --     vim.diagnostic.open_float(nil, opts)
+      --   end,
+      -- })
+      -- NOTE: Refactored for ++ performance
+      vim.keymap.set('n', '<leader>cs', function()
+        local opts = {
+          focusable = false,
+          close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end, { desc = 'Show diagnostic under cursor' })
 
-      local signs = { Error = '🔴', Warn = '🟡', Hint = 'H', Info = '' }
+      local signs = { Error = '❌', Warn = '⚠️', Hint = '', Info = '' }
       for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

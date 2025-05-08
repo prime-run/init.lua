@@ -1,6 +1,6 @@
 return {
   'L3MON4D3/LuaSnip',
-  version = 'v2.*',
+  version = '*',
   build = 'make install_jsregexp',
   dependencies = {
     'rafamadriz/friendly-snippets',
@@ -13,7 +13,7 @@ return {
 
     -- Set more aggressive history (helps with jumps)
     luasnip.config.setup {
-      history = true,
+      history = false,
       update_events = 'TextChanged,TextChangedI',
     }
 

@@ -7,19 +7,23 @@ return {
         Comment = { italic = true },
         Directory = { bold = true },
         ErrorMsg = { italic = true, bold = true },
+        BlinkCmpMenu = { bg = '#0d1117' }, -- GitHub dark background
+        BlinkCmpMenuBorder = { fg = '#0a0e14', bg = '#0d1117' }, -- Slightly darker border
+        BlinkCmpDoc = { bg = '#0d1117' }, -- GitHub dark background
+        BlinkCmpDocBorder = { fg = '#0a0e14', bg = '#0d1117' }, -- Slightly darker border
       },
       styles = { -- For example, to apply bold and italic, use "bold,italic"
         types = 'NONE', -- Style that is applied to types
         methods = 'NONE', -- Style that is applied to methods
         numbers = 'NONE', -- Style that is applied to numbers
         strings = 'NONE', -- Style that is applied to strings
-        comments = 'NONE', -- Style that is applied to comments
+        comments = 'italic', -- Style that is applied to comments
         keywords = 'NONE', -- Style that is applied to keywords
         constants = 'NONE', -- Style that is applied to constants
         functions = 'NONE', -- Style that is applied to functions
         operators = 'NONE', -- Style that is applied to operators
         variables = 'NONE', -- Style that is applied to variables
-        parameters = 'NONE', -- Style that is applied to parameters
+        parameters = 'bold,italic', -- Style that is applied to parameters
         conditionals = 'NONE', -- Style that is applied to conditionals
         virtual_text = 'NONE', -- Style that is applied to virtual text
       },

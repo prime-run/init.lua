@@ -1,59 +1,63 @@
 return {
   {
     'folke/tokyonight.nvim',
+
     config = function()
-      require('tokyonight').setup {
-        style = 'moon', -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+      local tokyonight = require 'tokyonight'
+
+      tokyonight.setup {
+        style = 'moon',
         transparent = true,
         terminal_colors = true,
         styles = {
-          -- Value is any valid attr-list value for `:help nvim_set_hl`
           comments = { italic = true },
           keywords = { italic = false },
-          -- Background styles. Can be "dark", "transparent" or "normal"
-          lualine_bold = true,
-          -- sidebars = 'dark', -- style for sidebars, see below
-          floats = 'dark', -- style for floating windows
+          sidebars = 'dark',
+          floats = 'dark',
         },
-        on_highlights = function(highlights, colors)
-          -- Set a very dark background for all floats
+
+        on_highlights = function(highlights, theme_colors)
+          local custom_palette = {
+            float_bg = '#02010d',
+            cmp_bg = '#0D1117',
+            float_border_fg = '#0D4D4D',
+            cmp_border_fg = '#0D4D4D',
+          }
+
+          local common_float_border_style = {
+            fg = custom_palette.float_border_fg,
+            bg = custom_palette.float_bg,
+          }
+
+          local common_cmp_item_style = {
+            bg = custom_palette.cmp_bg,
+          }
+
+          local common_cmp_border_style = {
+            fg = custom_palette.cmp_border_fg,
+            bg = custom_palette.cmp_bg,
+          }
+
           highlights.NormalFloat = {
-            bg = '#02010d', -- Slightly darker than #05090F
+            bg = custom_palette.float_bg,
           }
 
-          -- Set dark cyan borders for all floats
-          highlights.FloatBorder = {
-            fg = '#0D4D4D', -- Dark cyan
-            bg = '#02010d', -- Match the background
-          }
+          highlights.FloatBorder = common_float_border_style
+          highlights.BlinkCmpMenu = common_cmp_item_style
+          highlights.BlinkCmpMenuBorder = common_cmp_border_style
+          highlights.BlinkCmpDoc = common_cmp_item_style
+          highlights.BlinkCmpDocBorder = common_cmp_border_style
 
-          -- Also customize Telescope specifically to ensure consistency
           highlights.TelescopeNormal = {
-            bg = '#02010d',
-          }
-          highlights.TelescopePromptBorder = {
-            fg = '#0D4D4D',
-            bg = '#02010d',
-          }
-          highlights.TelescopeResultsBorder = {
-            fg = '#0D4D4D',
-            bg = '#02010d',
-          }
-          highlights.TelescopePreviewBorder = {
-            fg = '#0D4D4D',
-            bg = '#02010d',
+            bg = custom_palette.float_bg,
           }
 
-          -- Customize cmp (completion) floats
-          highlights.CmpDocumentation = {
-            bg = '#02010d',
-          }
-          highlights.CmpDocumentationBorder = {
-            fg = '#0D4D4D',
-            bg = '#02010d',
-          }
+          highlights.TelescopePromptBorder = common_float_border_style
+          highlights.TelescopeResultsBorder = common_float_border_style
+          highlights.TelescopePreviewBorder = common_float_border_style
         end,
       }
+
       vim.cmd.colorscheme 'tokyonight-moon'
     end,
   },
