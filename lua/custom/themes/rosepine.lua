@@ -1,6 +1,5 @@
 return {
   'rose-pine/neovim',
-
   name = 'rose-pine',
 
   config = function()
@@ -10,7 +9,6 @@ return {
       disable_background = true,
       disable_float_background = false,
       disable_italics = false,
-      -- Increase color vibrancy
       groups = {
         background_nc = '#000000',
         panel = 'surface',
