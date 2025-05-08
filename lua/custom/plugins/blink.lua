@@ -4,7 +4,8 @@ return {
   version = '*',
   dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
   opts = {
-    -- snippets = { preset = 'luasnip' },
+    snippets = { preset = 'luasnip' },
+
     keymap = {
       preset = 'default',
       ['<C-e>'] = {},
@@ -21,7 +22,7 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
     completion = {
       list = {
@@ -31,16 +32,16 @@ return {
         range = 'full',
       },
       menu = {
-        border = 'solid',
-        -- min_width = 50,
+        min_width = 25,
         scrollbar = false,
+        border = 'solid',
         draw = {
-          padding = { 1, 2 },
+          padding = { 2, 2 },
           treesitter = { 'lsp' },
           columns = {
             -- { 'label', 'label_description', gap = 1 },
-            { 'label', 'label_description', gap = 1 },
-            { 'kind', 'kind_icon', 'source_name' },
+            { 'label', 'label_description', gap = 2 },
+            { 'kind', 'source_name' },
             -- { 'kind_icon', 'kind' },
           },
         },
@@ -49,15 +50,19 @@ return {
         auto_show = true,
         auto_show_delay_ms = 150,
         window = {
-          border = 'rounded',
-          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
-          min_width = 15,
+          border = 'solid',
+          winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
+          min_width = 25,
           -- border = 'solid',
           -- scrollbar = false,
         },
       },
     },
     fuzzy = { implementation = 'prefer_rust_with_warning' },
+    cmdline = {
+      keymap = { preset = 'inherit' },
+      completion = { menu = { auto_show = true } },
+    },
     signature = { enabled = true, window = {
       border = 'padded',
       min_width = 15,
