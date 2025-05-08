@@ -27,25 +27,6 @@ return {
       -- Fallback to normal <C-k> behavior if no snippet active
     end, { expr = true, silent = true })
 
-    -- Alternative: Use Tab/Shift-Tab (uncomment to try)
-    --[[
-    vim.keymap.set({'i', 's'}, '<Tab>', function()
-      if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        return '<Tab>'
-      end
-    end, {expr = true})
-    
-    vim.keymap.set({'i', 's'}, '<S-Tab>', function()
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        return '<S-Tab>'
-      end
-    end, {expr = true})
-    --]]
-
     -- Visual feedback when jumping works
     vim.api.nvim_create_autocmd('User', {
       pattern = 'LuasnipJumpNodeEnter',
