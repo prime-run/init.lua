@@ -8,6 +8,7 @@ return {
     'supermaven-inc/supermaven-nvim',
     config = function()
       require('supermaven-nvim').setup {
+        -- keymaps = {},
         ignore_filetypes = { cpp = true, oil = true },
       }
     end,
