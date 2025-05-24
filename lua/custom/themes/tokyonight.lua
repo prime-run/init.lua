@@ -18,8 +18,8 @@ return {
 
         on_highlights = function(highlights, theme_colors)
           local custom_palette = {
-            float_bg = '#02010d',
-            cmp_bg = '#0D1117',
+            float_bg = '#112638',
+            cmp_bg = '#112638',
             float_border_fg = '#0D4D4D',
             cmp_border_fg = '#0D4D4D',
           }
@@ -47,6 +47,7 @@ return {
           highlights.BlinkCmpMenuBorder = common_cmp_border_style
           highlights.BlinkCmpDoc = common_cmp_item_style
           highlights.BlinkCmpDocBorder = common_cmp_border_style
+
 
           highlights.TelescopeNormal = {
             bg = custom_palette.float_bg,

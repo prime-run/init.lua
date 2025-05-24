@@ -81,7 +81,10 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 vim.keymap.set('v', '<leader>p', [["_dP]])
 -- C and rust - middle finger to auto tag XD
-vim.keymap.set({ 'i', 'v' }, '<C-;>', '<Esc>$a;')
+vim.keymap.set({ 'i', 'n' }, '<C-;>', '<Esc>$a;<Esc>o')
+
+vim.keymap.set('i', '<C-Right>', '<End>', { silent = true })
+vim.keymap.set('i', '<C-Left>', '<Home>', { silent = true })
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -101,7 +104,6 @@ vim.keymap.set('n', '<leader>colr', function()
   vim.cmd.colorscheme 'rose-pine'
 end, { desc = 'Color Rose-pine' })
 
---replace them ffs that messes up the damn pp in v mode!
 vim.keymap.set('i', '<C-c>', '<C-[><Esc>', { noremap = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -117,20 +119,17 @@ vim.keymap.set('n', ';', ':')
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding-bottom=0' }, {
-      -- padding-left , padding-bottom, margin-*, etc... also can be passed
       detach = true,
-      -- detach to make sure it doesn’t interfere with nvim
     })
   end,
 })
 vim.api.nvim_create_autocmd('VimLeave', {
   callback = function()
     vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding=default' }, {
-      --- reset on exit, (default is 25)
       detach = true,
     })
   end,
 })
 
-vim.cmd [[autocmd BufRead,BufNewFile .zshenv set filetype=sh]]
-vim.cmd [[autocmd BufRead,BufNewFile .zshrc set filetype=sh]]
+-- vim.cmd [[autocmd BufRead,BufNewFile .zshenv set filetype=sh]]
+-- vim.cmd [[autocmd BufRead,BufNewFile .zshrc set filetype=sh]]

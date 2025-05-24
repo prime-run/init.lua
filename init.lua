@@ -187,6 +187,7 @@ require('lazy').setup {
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('K', function() require("pretty_hover").hover() end, 'Pretty Hover')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -282,24 +283,15 @@ require('lazy').setup {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {
-        --   settings = {
-        --     python = {
-        --       analysis = {
-        --         typeCheckingMode = 'basic', -- or 'strict' for stricter checks
-        --         diagnosticMode = 'workspace',
-        --         autoSearchPaths = true,
-        --         useLibraryCodeForTypes = true,
-        --         stubPath = vim.fn.stdpath 'data' .. '/stubs',
-        --         extraPaths = { './your_project_dir' }, -- Add your Django project root
-        --         djangoEnabled = true,
-        --         diagnosticSeverityOverrides = {
-        --           reportUnusedVariable = 'warning',
-        --         },
-        --       },
-        --     },
-        --   },
-        -- },
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = 'basic', -- or 'strict'
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -314,6 +306,7 @@ require('lazy').setup {
             },
           },
         },
+        -- rust_analyzer configuration removed as it's now handled by rustaceanvim
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
