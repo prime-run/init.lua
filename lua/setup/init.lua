@@ -24,14 +24,12 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
---  mapped sequence wait time
 vim.opt.timeoutlen = 300
--- Configure how new splits should be opened
+-- splits, :vsplit, :vs  | :split, :sp
 vim.opt.splitright = true
 vim.opt.splitbelow = true
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
+--  display certain whitespace characters in the editor.
+--  See `:help 'list' and `:help 'listchars'`
 vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -40,48 +38,32 @@ vim.opt.inccommand = 'split'
 
 --cursor line
 vim.opt.cursorline = true
+vim.opt.scrolloff = 5 -- trying to use zz more!
 
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 13
-
--- Clear highlights on search whvven pressing <Esc> in normal mode
+--clear highlights on search
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 vim.keymap.set('n', '<leader>pv', ':e .<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>pp', vim.cmd.Oil)
 
 vim.keymap.set('n', '<Tab>', 'o<Esc>', { noremap = true, silent = true })
 
--- vim.keymap.set('n', '!', '^', { noremap = true, silent = true })
--- vim.keymap.set('n', '@', '$', { noremap = true, silent = true })
---
--- vim.keymap.set('v', '!', '^', { noremap = true, silent = true })
--- vim.keymap.set('v', '@', '$', { noremap = true, silent = true })
--- move commands in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
-
--- vim.keymap.set('i', '<M-h>', '<Left>', { noremap = true })
--- vim.keymap.set('i', '<M-j>', '<Down>', { noremap = true })
--- vim.keymap.set('i', '<M-k>', '<Up>', { noremap = true })
--- vim.keymap.set('i', '<M-l>', '<Right>', { noremap = true })
-
-vim.keymap.set('i', '<M-CR>', '<Esc>o<UP>', { noremap = true, silent = true })
-
+-- vim.keymap.set('i', '<C-i>', '<C-u>', { remap = true })
+vim.keymap.set('i', '<C-v>', '<C-r>+', { remap = true, silent = true })
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 vim.keymap.set('v', '<leader>p', [["_dP]])
 -- C and rust - middle finger to auto tag XD
-vim.keymap.set({ 'i', 'n' }, '<C-;>', '<Esc>$a;<Esc>o')
+vim.keymap.set({ 'i', 'n' }, '<M-;>', '<Esc>$a;<Esc>o')
 
 vim.keymap.set('i', '<C-Right>', '<End>', { silent = true })
 vim.keymap.set('i', '<C-Left>', '<Home>', { silent = true })

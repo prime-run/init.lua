@@ -187,7 +187,9 @@ require('lazy').setup {
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          map('K', function() require("pretty_hover").hover() end, 'Pretty Hover')
+          map('K', function()
+            require('pretty_hover').hover()
+          end, 'Pretty Hover')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -268,7 +270,7 @@ require('lazy').setup {
         vim.diagnostic.open_float(nil, opts)
       end, { desc = 'Show diagnostic under cursor' })
 
-      local signs = { Error = '❌', Warn = '⚠️', Hint = '', Info = '' }
+      local signs = { Error = '', Warn = '', Hint = '', Info = '' }
       for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

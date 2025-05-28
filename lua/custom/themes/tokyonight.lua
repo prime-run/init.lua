@@ -48,7 +48,6 @@ return {
           highlights.BlinkCmpDoc = common_cmp_item_style
           highlights.BlinkCmpDocBorder = common_cmp_border_style
 
-
           highlights.TelescopeNormal = {
             bg = custom_palette.float_bg,
           }
@@ -56,6 +55,12 @@ return {
           highlights.TelescopePromptBorder = common_float_border_style
           highlights.TelescopeResultsBorder = common_float_border_style
           highlights.TelescopePreviewBorder = common_float_border_style
+
+          -- Make inlay hints transparent
+          highlights.LspInlayHint = {
+            bg = 'NONE',
+            fg = theme_colors.comment,
+          }
         end,
       }
 
