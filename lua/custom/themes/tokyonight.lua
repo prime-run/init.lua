@@ -56,10 +56,15 @@ return {
           highlights.TelescopeResultsBorder = common_float_border_style
           highlights.TelescopePreviewBorder = common_float_border_style
 
-          -- Make inlay hints transparent
+          highlights.DiagnosticUnnecessary = {
+            fg = '#8E92AB',
+            bg = 'NONE',
+          }
+          -- vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = '#CCCCCC', bg = 'NONE' })
+          -- inlay hints
           highlights.LspInlayHint = {
             bg = 'NONE',
-            fg = theme_colors.comment,
+            fg = '#3D4267',
           }
         end,
       }
