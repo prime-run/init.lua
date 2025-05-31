@@ -1,9 +1,5 @@
 require 'setup'
 
--- vim.api.nvim_create_user_command('RunMyCmd', function(opts)
---   vim.cmd('!' .. table.concat(opts.fargs, ' '))
--- end, { nargs = '+' })
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -13,56 +9,68 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
 require('lazy').setup {
-  'tpope/vim-sleuth', --auto shift width and width tab
+  'tpope/vim-sleuth',
 
+  { 'vhyrro/luarocks.nvim', priority = 1000, config = true },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-
-        build = 'make',
-
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
+      { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = true },
     },
     config = function()
       require('telescope').setup {
         defaults = {
+
+          -- vimgrep_arguments = {
+          --   'rg',
+          --   '--color=never',
+          --   '--no-heading',
+          --   '--with-filename',
+          --   '--line-number',
+          --   '--column',
+          --   '--smart-case',
+          --   '--trim',
+          -- },
+          horizontal_padding = 5,
+          vertical_padding = 5,
+          prompt_prefix = ' ❯ ',
+          -- preview_cutoff = 10,
+          color_devicons = true,
           --   mappings = {
-          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           file_ignore_patterns = {
             'node_modules',
-            'venv',
             '.git',
+            '.png',
+            '.jpeg',
+            '.jpg',
+            '.webp',
+            '.gif',
+            '.gif',
+            '.apk',
           },
-          --   },
         },
-        -- pickers = {}
+        -- pickers = {},
         extensions = {
+
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
         },
       }
 
-      pcall(require('telescope').load_extension, 'fzf')
+      -- pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', builtin.fd, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -71,6 +79,20 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 
       vim.keymap.set('n', '<leader><leader>', function()
+        builtin.current_buffer_fuzzy_find {
+          fuzzy = false,
+          layout_strategy = 'vertical',
+          sorting_strategy = 'ascending',
+          layout_config = {
+            width = 0.5,
+            height = 0.7,
+            prompt_position = 'top',
+          },
+          previewer = false,
+        }
+      end, { desc = '[/] NON Fuzzily search in current buffer' })
+
+      vim.keymap.set('n', '<leader>b', function()
         builtin.buffers(require('telescope.themes').get_dropdown {
           sort_mru = true,
           ignore_current_buffer = true,
@@ -124,8 +146,8 @@ require('lazy').setup {
           layout_strategy = 'vertical',
           sorting_strategy = 'ascending',
           layout_config = {
-            width = 0.7, -- 80% of the screen width
-            height = 0.7, -- 80% of the screen height
+            width = 0.8,
+            height = 0.9,
             prompt_position = 'top',
           },
           previewer = false,
@@ -142,6 +164,12 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>shpr', function()
+        builtin.find_files { vim.cmd 'cd ~/.config/hypr' }
+      end, { desc = '[S]earch [N]eovim files' })
+
+      require('custom.filters.rg_filters').setup()
     end,
   },
   -- LSP Plugins NOTE: Initial Setup

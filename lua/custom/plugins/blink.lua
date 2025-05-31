@@ -1,4 +1,3 @@
---TODO:Update this config! holly molly blink is moving fast gg ++++
 return {
   'saghen/blink.cmp',
   version = '*',

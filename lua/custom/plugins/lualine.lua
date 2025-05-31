@@ -63,7 +63,7 @@ return {
           { 'mode', separator = { left = '', right = '' }, padding = 1 },
         },
         lualine_b = {
-          { -- Pill-shaped filename component
+          {
             'filename',
             path = 1,
             separator = { left = '', right = '' },
@@ -71,7 +71,7 @@ return {
           },
         },
         lualine_c = { 'lsp_status', 'diagnostics', 'branch', 'diff' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },

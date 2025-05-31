@@ -12,56 +12,79 @@ return {
         styles = {
           comments = { italic = true },
           keywords = { italic = false },
-          sidebars = 'dark',
-          floats = 'dark',
+          -- sidebars = 'dark',
+          -- floats = 'dark',
         },
 
-        on_highlights = function(highlights, theme_colors)
-          local custom_palette = {
-            float_bg = '#112638',
-            cmp_bg = '#112638',
-            float_border_fg = '#0D4D4D',
-            cmp_border_fg = '#0D4D4D',
-          }
+        on_highlights = function(highlights)
+          local prompts = '#1A1A22'
+          local mid = '#000000'
+          local darkest = '#05050A'
+          local sec = '#CA001E'
+          local prompts_drk = '#0F0F14'
 
-          local common_float_border_style = {
-            fg = custom_palette.float_border_fg,
-            bg = custom_palette.float_bg,
-          }
+          highlights.TelescopePromptNormal = { fg = '#FFFFFF', bg = prompts }
+          highlights.TelescopePromptBorder = { fg = prompts, bg = prompts }
+          highlights.TelescopePromptTitle = {}
+          highlights.TelescopePromptPrefix = { fg = '#C586C0', bold = true }
 
-          local common_cmp_item_style = {
-            bg = custom_palette.cmp_bg,
-          }
+          -- highlights.TelescopePreviewNormal = { fg = '#A0C0D0', bg = mid }
+          -- highlights.TelescopePreviewBorder = { fg = mid, bg = mid }
+          highlights.TelescopePreviewNormal = { fg = '#A0C0D0', bg = prompts }
+          highlights.TelescopePreviewBorder = { fg = prompts, bg = prompts }
+          highlights.TelescopePreviewTitle = {}
 
-          local common_cmp_border_style = {
-            fg = custom_palette.cmp_border_fg,
-            bg = custom_palette.cmp_bg,
-          }
+          highlights.TelescopeResultsNormal = { fg = '#A0C0D0', bg = darkest }
+          highlights.TelescopeResultsBorder = { fg = darkest, bg = darkest }
+          highlights.TelescopeResultsTitle = {}
 
-          highlights.NormalFloat = {
-            bg = custom_palette.float_bg,
-          }
+          highlights.TelescopeSelection = { fg = '#FFFFFF', bg = '#252530' }
 
-          highlights.FloatBorder = common_float_border_style
-          highlights.BlinkCmpMenu = common_cmp_item_style
-          highlights.BlinkCmpMenuBorder = common_cmp_border_style
-          highlights.BlinkCmpDoc = common_cmp_item_style
-          highlights.BlinkCmpDocBorder = common_cmp_border_style
+          highlights.TelescopeMatching = { fg = '#C586C0', bold = true }
 
-          highlights.TelescopeNormal = {
-            bg = custom_palette.float_bg,
-          }
+          ------CMP
+          highlights.CmpPmenu = { fg = '#A0C0D0', bg = '#07070F' }
+          highlights.CmpPmenuSel = { fg = '#FFFFFF', bg = '#252530' }
+          highlights.CmpPmenuBorder = { fg = '#07070F', bg = '#07070F' }
+          highlights.CmpPmenuSbar = { bg = '#0A0A10' }
+          highlights.CmpPmenuThumb = { bg = '#4A4A4A' }
 
-          highlights.TelescopePromptBorder = common_float_border_style
-          highlights.TelescopeResultsBorder = common_float_border_style
-          highlights.TelescopePreviewBorder = common_float_border_style
+          highlights.CmpItemAbbr = { fg = '#A0C0D0' }
+          highlights.CmpItemAbbrMatch = { fg = '#C586C0', bold = true }
+          highlights.CmpItemKind = { fg = '#7FD1E0' }
+          highlights.CmpItemKindFunction = { fg = '#A0C0D0' }
+          highlights.CmpItemKindMethod = { fg = '#A0C0D0' }
+          highlights.CmpItemKindVariable = { fg = '#FFC66D' }
+          highlights.CmpItemKindKeyword = { fg = '#C586C0' }
+          highlights.CmpItemKindSnippet = { fg = '#A0C0D0' }
+          highlights.CmpItemKindProperty = { fg = '#C586C0' }
+          highlights.CmpItemKindField = { fg = '#FFC66D' }
+          highlights.CmpItemKindEnum = { fg = '#80D4A0' }
+          highlights.CmpItemKindInterface = { fg = '#7FD1E0' }
+          highlights.CmpItemKindText = { fg = '#A0C0D0' }
+          highlights.CmpItemKindClass = { fg = '#80D4A0' }
+          highlights.CmpItemMenu = { fg = '#607080' }
+
+          highlights.CmpDoc = { fg = '#A0C0D0', bg = '#05050A' }
+          highlights.CmpDocBorder = { fg = '#05050A', bg = '#05050A' }
+
+          highlights.BlinkCmpDoc = { fg = '#A0C0D0', bg = prompts }
+          highlights.BlinkCmpDocBorder = { fg = prompts, bg = prompts }
+
+          highlights.BlinkCmpMenu = { fg = '#A0C0D0', bg = prompts_drk }
+          highlights.BlinkCmpMenuBorder = { fg = '#A0C0D0', bg = prompts_drk }
+
+          highlights.BlinkCmpLabelMatch = { fg = '#C586C0', bold = true }
+
+          --------global
+          highlights.FloatBorder = { fg = prompts_drk, bg = prompts_drk }
+          highlights.NormalFloat = { fg = '#A0C0D0', bg = prompts_drk }
 
           highlights.DiagnosticUnnecessary = {
             fg = '#8E92AB',
             bg = 'NONE',
           }
-          -- vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = '#CCCCCC', bg = 'NONE' })
-          -- inlay hints
+          -- inlay
           highlights.LspInlayHint = {
             bg = 'NONE',
             fg = '#3D4267',
