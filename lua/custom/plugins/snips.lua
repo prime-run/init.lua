@@ -9,7 +9,6 @@ local function insert_go_error_check()
 
   vim.cmd 'normal! k$'
   vim.cmd 'normal! k$'
-
   vim.api.nvim_feedkeys('a', 'n', false)
 end
 

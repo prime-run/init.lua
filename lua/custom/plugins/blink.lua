@@ -7,10 +7,16 @@ return {
 
     keymap = {
       preset = 'default',
-      ['<C-e>'] = {},
-      ['<C-space>'] = {
+      -- ['<C-e>'] = {},
+      ['<C-e>'] = {
         function(cmp)
           cmp.show { providers = { 'snippets' } }
+        end,
+      },
+
+      ['<C-r>'] = {
+        function(cmp)
+          cmp.show { providers = { 'LSP' } }
         end,
       },
     },
@@ -21,26 +27,36 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      providers = {
+        snippets = {
+          max_items = 4,
+          score_offset = -10,
+        },
+      },
+      -- default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
     completion = {
+      -- ghost_text = {
+      --   enabled = true },
       list = {
         selection = { preselect = true, auto_insert = false },
       },
       keyword = {
         range = 'full',
+        -- range = 'prefix',
       },
       menu = {
         min_width = 25,
         scrollbar = false,
         border = 'solid',
         draw = {
-          padding = { 2, 2 },
+          padding = 1,
+          gap = 4,
           treesitter = { 'lsp' },
           columns = {
             -- { 'label', 'label_description', gap = 1 },
-            { 'label', 'label_description', gap = 2 },
-            { 'kind', 'source_name' },
+            { 'label', 'label_description', gap = 1 },
+            { 'kind', 'source_name', gap = 1 },
             -- { 'kind_icon', 'kind' },
           },
         },
@@ -48,6 +64,8 @@ return {
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 150,
+        treesitter_highlighting = true,
+
         draw = function(opts)
           if opts.item and opts.item.documentation then
             local out = require('pretty_hover.parser').parse(opts.item.documentation.value)
@@ -60,8 +78,7 @@ return {
           border = 'solid',
           winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
           min_width = 25,
-          -- border = 'solid',
-          -- scrollbar = false,
+          scrollbar = false,
         },
       },
     },
