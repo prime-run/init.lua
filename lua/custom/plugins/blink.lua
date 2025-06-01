@@ -1,6 +1,7 @@
 return {
   'saghen/blink.cmp',
   version = '*',
+  build = 'cargo build --release',
   dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
   opts = {
     snippets = { preset = 'luasnip' },
@@ -19,6 +20,14 @@ return {
           cmp.show { providers = { 'LSP' } }
         end,
       },
+      ['<M-n>'] = {
+        function(cmp)
+          cmp.show_signature()
+        end,
+      },
+      -- ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+      -- ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+      -- ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
     },
 
     appearance = {
@@ -82,7 +91,7 @@ return {
         },
       },
     },
-    fuzzy = { implementation = 'prefer_rust_with_warning' },
+    fuzzy = { implementation = 'rust' },
     cmdline = {
       keymap = { preset = 'inherit' },
       completion = { menu = { auto_show = true } },

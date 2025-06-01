@@ -19,7 +19,7 @@ return {
         'vim',
         'vimdoc',
         'typescript',
-        'tsx', -- for proper JSX support, its always goddamn js
+        'tsx',
         'javascript',
         'python',
         'html',

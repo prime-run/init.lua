@@ -1,5 +1,13 @@
-vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
+-- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 vim.keymap.set('n', '<leader>tt', vim.cmd.Floaterminal)
+
+vim.keymap.set('t', '<Esc><Esc><Esc>', function()
+  if vim.bo.buftype == 'terminal' then
+    vim.cmd 'q'
+  else
+    vim.cmd 'normal! <Esc>'
+  end
+end, { noremap = true, silent = true, desc = 'Quit terminal or exit insert mode' })
 
 local state = {
   floating = {

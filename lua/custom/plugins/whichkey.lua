@@ -1,9 +1,8 @@
 return {
   'folke/which-key.nvim',
   event = 'VimEnter',
-
+  lazy = true,
   opts = {
-    -- delay between pressing a key and opening which-key (milliseconds)
     delay = 750,
     icons = {
       mappings = vim.g.have_nerd_font,
