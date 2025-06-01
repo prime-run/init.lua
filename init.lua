@@ -11,7 +11,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   'tpope/vim-sleuth',
-
   { 'vhyrro/luarocks.nvim', priority = 1000, config = true },
   {
     'nvim-telescope/telescope.nvim',
@@ -25,17 +24,6 @@ require('lazy').setup {
     config = function()
       require('telescope').setup {
         defaults = {
-
-          -- vimgrep_arguments = {
-          --   'rg',
-          --   '--color=never',
-          --   '--no-heading',
-          --   '--with-filename',
-          --   '--line-number',
-          --   '--column',
-          --   '--smart-case',
-          --   '--trim',
-          -- },
           horizontal_padding = 5,
           vertical_padding = 5,
           prompt_prefix = ' ❯ ',
@@ -55,16 +43,13 @@ require('lazy').setup {
             '.apk',
           },
         },
-        -- pickers = {},
         extensions = {
-
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
         },
       }
 
-      -- pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
       local builtin = require 'telescope.builtin'
@@ -172,11 +157,12 @@ require('lazy').setup {
       require('custom.filters.rg_filters').setup()
     end,
   },
+
   -- LSP Plugins NOTE: Initial Setup
+  --
   {
     'folke/lazydev.nvim',
-    ft = { 'lua', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact' }, -- Load for TS/JS files too
-
+    ft = { 'lua', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact' },
     opts = {
       library = {
         { path = 'luvit-meta/library', words = { 'vim%.uv' } },
