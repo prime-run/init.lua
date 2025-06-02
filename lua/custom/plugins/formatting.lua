@@ -49,7 +49,7 @@ return {
 
       lua = { 'stylua' },
 
-      python = { 'black' },
+      python = { 'ruff' },
     },
   },
   -- vim.keymap.set({ 'n', 'v' }, '<leader>ff', function()

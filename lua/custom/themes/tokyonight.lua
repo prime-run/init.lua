@@ -76,6 +76,9 @@ return {
 
           highlights.BlinkCmpLabelMatch = { fg = '#C586C0', bold = true }
 
+          highlights.DiagnosticVirtualTextHint = { fg = '#996c12' }
+          highlights.DiagnosticHint = { fg = '#996c12' }
+
           --------global
           highlights.FloatBorder = { fg = prompts_drk, bg = prompts_drk }
           highlights.NormalFloat = { fg = '#A0C0D0', bg = prompts_drk }

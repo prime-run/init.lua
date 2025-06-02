@@ -40,9 +40,8 @@ return {
       auto_install = true,
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true },
       textobjects = {
         select = {
           enable = true,
@@ -58,8 +57,12 @@ return {
         },
         move = {
           enable = true,
+          set_jump = true,
           goto_next_start = { [']m'] = '@function.outer' },
           goto_previous_start = { ['[m'] = '@function.outer' },
+
+          goto_next = { [']i'] = '@conditional.outer' },
+          goto_previous = { ['[i'] = '@conditional.inner' },
         },
       },
     }
