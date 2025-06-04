@@ -39,25 +39,30 @@ return {
       javascriptreact = { 'prettier' },
       typescriptreact = { 'prettier' },
       css = { 'prettier' },
-      html = { 'prettier' },
+      html = {
+        'prettier',
+        args = {
+          '--html-whitespace-sensitivity',
+          'strict',
+          '--print-width',
+          '120',
+          '--single-attribute-per-line',
+          'true',
+        },
+      },
       json = { 'prettier' },
       yaml = { 'prettier' },
       toml = { 'taplo' },
       markdown = { 'markdownlint' },
       graphql = { 'prettier' },
       liquid = { 'prettier' },
+      htmldjango = {
+        'djlint',
+      },
 
       lua = { 'stylua' },
 
-      python = { 'ruff' },
+      python = { 'ruff_format' },
     },
   },
-  -- vim.keymap.set({ 'n', 'v' }, '<leader>ff', function()
-  --   require('conform').format {
-  --     lsp_fallback = true,
-  --     async = false,
-  --     timeout_ms = 1000,
-  --   }
-  --   vim.cmd.write()
-  -- end, { desc = 'Format file or range (in visual mode)' }),
 }

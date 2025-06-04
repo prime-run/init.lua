@@ -30,10 +30,10 @@ return {
       -- ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
     },
 
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'normal',
-    },
+    -- appearance = {
+    --   use_nvim_cmp_as_default = true,
+    --   nerd_font_variant = 'normal',
+    -- },
 
     sources = {
       providers = {

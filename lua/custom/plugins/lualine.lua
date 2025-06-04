@@ -15,23 +15,21 @@ return {
       semilightgray = '#6c6f93',
       kitty = '#9ABBE6',
     }
-    -- #9ABBE6
-    -- #9ABBE6
 
     local my_lualine_theme = {
       normal = {
         a = { bg = colors.blue, fg = colors.bg, gui = 'bold' },
-        b = { bg = colors.kitty, fg = colors.bg }, -- Pill background
+        b = { bg = colors.kitty, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
       insert = {
         a = { bg = colors.green, fg = colors.bg, gui = 'bold' },
-        b = { bg = colors.kitty, fg = colors.bg }, -- Pill background
+        b = { bg = colors.kitty, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
       visual = {
         a = { bg = colors.violet, fg = colors.bg, gui = 'bold' },
-        b = { bg = colors.green, fg = colors.bg }, -- Consistent pill color
+        b = { bg = colors.green, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
       command = {
@@ -51,11 +49,10 @@ return {
       },
     }
 
-    -- Configure lualine with pill-shaped filename and no Git info
     lualine.setup {
       options = {
         theme = my_lualine_theme,
-        component_separators = { left = '', right = '' }, -- Pill separators
+        component_separators = { left = '', right = '' },
         section_separators = { left = ' ', right = ' ' },
       },
       sections = {

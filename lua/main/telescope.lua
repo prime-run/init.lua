@@ -1,14 +1,8 @@
 return {
   --
-  --
-  --
   -- TODO:
   -- -for leader sn -> if prefixed with ' ' opens oil in there
   -- -manage plugins to be lazy loaded
-  --
-  --
-  --
-  --
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
   branch = '0.1.x',
@@ -59,6 +53,17 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>sq', function()
+      builtin.diagnostics(require('telescope.themes').get_ivy {
+        layout_config = {
+          height = 17,
+        },
+        prompt_title = '',
+        preview_title = '',
+        result_title = '',
+        initial_mode = 'normal',
+      })
+    end, { desc = '[S]earch Recent Files ("." for repeat)' })
 
     vim.keymap.set('n', '<leader><leader>', function()
       builtin.current_buffer_fuzzy_find {
@@ -120,10 +125,6 @@ return {
     end, { desc = 'Jump to second most recent buffer' })
 
     vim.keymap.set('n', '<leader>/', function()
-      -- builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-      --   previewer = false,
-      --   windblend = 1,
-      -- })
       builtin.current_buffer_fuzzy_find {
         layout_strategy = 'vertical',
         sorting_strategy = 'ascending',
@@ -139,7 +140,7 @@ return {
     vim.keymap.set('n', '<leader>s/', function()
       builtin.live_grep {
         grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
+        prompt_title = 'Live Grep',
       }
     end, { desc = '[S]earch [/] in Open Files' })
 

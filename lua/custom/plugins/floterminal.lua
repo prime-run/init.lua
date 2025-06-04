@@ -1,7 +1,7 @@
 -- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 vim.keymap.set('n', '<leader>tt', vim.cmd.Floaterminal)
 
-vim.keymap.set('t', '<Esc><Esc><Esc>', function()
+vim.keymap.set('t', '<Esc><Esc>', function()
   if vim.bo.buftype == 'terminal' then
     vim.cmd 'q'
   else

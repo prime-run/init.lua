@@ -35,10 +35,6 @@ return {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-        --vim.api.nvim_set_hl(0, "LspReferenceText", { fg = "#FF0000" })
-        -- vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = "#FF0000" })
-        -- vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = "#FF0000" })
-
         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
 
@@ -47,6 +43,9 @@ return {
             group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
+          -- vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = '#FF0000' })
+          -- vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = '#FF0000' })
+          -- vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#FF0000' })
 
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = event.buf,
@@ -128,6 +127,13 @@ return {
           },
         },
       },
+      -- pylsp = {},
+
+      -- ruff = {
+      --   init_options = {
+      --     logLevel = 'error',
+      --   },
+      -- },
     }
 
     local ensure_installed = vim.tbl_keys(servers or {})
@@ -136,6 +142,8 @@ return {
       'prettier',
       'gopls',
       'taplo',
+      'pyright',
+      'ruff',
     })
 
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
