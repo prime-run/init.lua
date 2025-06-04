@@ -7,7 +7,7 @@ vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 -- it's already in the status line
 vim.opt.showmode = false
--- Sync clipboard between
+-- sync clipboard
 -- vim.schedule(function()
 --   vim.opt.clipboard = 'unnamedplus'
 -- end)
@@ -17,9 +17,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 vim.opt.termguicolors = true
--- Save undo history
 vim.opt.undofile = true
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+-- case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
@@ -33,12 +32,11 @@ vim.opt.splitbelow = true
 vim.opt.list = false
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
 --cursor line
 vim.opt.cursorline = true
-vim.opt.scrolloff = 5 -- trying to use zz more!
+vim.opt.scrolloff = 6 -- trying to use zz more!
 
 --clear highlights on search
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -62,16 +60,15 @@ vim.keymap.set('i', '<C-v>', '<C-r>+', { remap = true, silent = true })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 vim.keymap.set('v', '<leader>p', [["_dP]])
--- C and rust - middle finger to auto tag XD
 vim.keymap.set({ 'i', 'n' }, '<M-;>', '<Esc>$a;<Esc>o')
 
 vim.keymap.set('i', '<C-Right>', '<End>', { silent = true })
 vim.keymap.set('i', '<C-Left>', '<Home>', { silent = true })
 
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { silent = true })
 
 vim.keymap.set('n', '<leader>rep', function()
   local replacement = vim.fn.escape(vim.fn.getreg '.', '/\\&')
@@ -82,19 +79,15 @@ vim.keymap.set('n', '<leader>colt', function()
   vim.cmd.colorscheme 'tokyonight-moon'
 end, { desc = 'Color Tokyo' })
 
-vim.keymap.set('n', '<leader>colr', function()
-  vim.cmd.colorscheme 'rose-pine'
-end, { desc = 'Color Rose-pine' })
-
 vim.keymap.set('i', '<C-c>', '<C-[><Esc>', { noremap = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight on yanked',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
+
 vim.keymap.set('n', '<leader>gs', '<cmd>Telescope git_status<CR>', { desc = '[T]elescope [g]it [s]tatus' })
 vim.keymap.set('n', ';', ':')
 
@@ -105,6 +98,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
     })
   end,
 })
+
 vim.api.nvim_create_autocmd('VimLeave', {
   callback = function()
     vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding=default' }, {
