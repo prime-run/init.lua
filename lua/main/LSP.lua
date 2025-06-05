@@ -10,7 +10,6 @@ return {
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
-
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc, mode)
@@ -43,9 +42,6 @@ return {
             group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
-          -- vim.api.nvim_set_hl(0, 'LspReferenceText', { fg = '#FF0000' })
-          -- vim.api.nvim_set_hl(0, 'LspReferenceRead', { fg = '#FF0000' })
-          -- vim.api.nvim_set_hl(0, 'LspReferenceWrite', { fg = '#FF0000' })
 
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = event.buf,
@@ -109,14 +105,14 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
 
-    local capabilities = vim.tbl_deep_extend(
-      'force',
-      vim.lsp.protocol.make_client_capabilities(),
-      require('blink.cmp').get_lsp_capabilities()
-      ---
-    )
-    local servers = {
+    local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('blink.cmp').get_lsp_capabilities())
 
+    local servers = {
+      bashls = {},
+      clangd = {
+        init_options = { clangdFileStatus = true },
+        filetypes = { 'c' },
+      },
       lua_ls = {
         settings = {
           Lua = {
@@ -127,16 +123,26 @@ return {
           },
         },
       },
-      -- pylsp = {},
-
-      -- ruff = {
-      --   init_options = {
-      --     logLevel = 'error',
-      --   },
-      -- },
+      pyright = {
+        settings = {
+          pyright = {
+            disableOrganizeImports = true,
+            -- typeCheckingMode = 'off',
+          },
+          python = {
+            analysis = {
+              ignore = { '*' },
+            },
+          },
+        },
+      },
+      html = {
+        filetypes = { 'html', 'htmldjango' },
+      },
+      ruff = {},
     }
 
-    local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_installed = vim.tbl_keys(servers)
     vim.list_extend(ensure_installed, {
       'stylua',
       'prettier',
@@ -146,18 +152,19 @@ return {
       'ruff',
     })
 
+    require('mason').setup()
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
-    }
+    local lspconfig = require 'lspconfig'
+
+    for name, config in pairs(servers) do
+      if type(config) ~= 'table' then
+        config = {}
+      end
+      config = vim.tbl_deep_extend('force', {}, {
+        capabilities = capabilities,
+      }, config)
+      lspconfig[name].setup(config)
+    end
   end,
 }
