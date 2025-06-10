@@ -10,7 +10,7 @@ return {
     -- FIX: no more dependecy arr, instead lazy load the all!
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-tree/nvim-web-devicons', enabled = true },
+    { 'nvim-tree/nvim-web-devicons', lazy = true, enabled = true },
   },
   config = function()
     require('telescope').setup {

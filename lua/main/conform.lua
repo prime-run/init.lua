@@ -54,7 +54,6 @@ return {
       yaml = { 'prettier' },
       toml = { 'taplo' },
       markdown = { 'markdownlint' },
-      graphql = { 'prettier' },
       liquid = { 'prettier' },
       htmldjango = {
         'djlint',

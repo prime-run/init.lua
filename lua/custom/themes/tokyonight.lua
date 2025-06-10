@@ -76,15 +76,16 @@ return {
 
           highlights.BlinkCmpLabelMatch = { fg = '#C586C0', bold = true }
 
-          highlights.DiagnosticVirtualTextHint = { fg = '#996c12' }
-          highlights.DiagnosticHint = { fg = '#996c12' }
+          highlights.DiagnosticVirtualTextHint = { bg = '#25270e', fg = '#FFBA03' }
+          highlights.DiagnosticVirtualTextError = { bg = '#130707', fg = '#FF0000' }
+          highlights.DiagnosticHint = { fg = '#009955' }
 
           --------global
           highlights.FloatBorder = { fg = prompts_drk, bg = prompts_drk }
           highlights.NormalFloat = { fg = '#A0C0D0', bg = prompts_drk }
 
           highlights.DiagnosticUnnecessary = {
-            fg = '#8E92AB',
+            fg = '#000000',
             bg = 'NONE',
           }
           -- inlay
@@ -96,6 +97,8 @@ return {
       }
 
       vim.cmd.colorscheme 'tokyonight-moon'
+      vim.api.nvim_set_hl(0, '@punctuation.bracket', { fg = '#F3C623' })
+      vim.api.nvim_set_hl(0, '@module', { fg = '#00FF9c' })
     end,
   },
 }

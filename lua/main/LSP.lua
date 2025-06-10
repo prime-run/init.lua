@@ -140,6 +140,7 @@ return {
         filetypes = { 'html', 'htmldjango' },
       },
       ruff = {},
+      marksman = {},
     }
 
     local ensure_installed = vim.tbl_keys(servers)
@@ -148,8 +149,7 @@ return {
       'prettier',
       'gopls',
       'taplo',
-      'pyright',
-      'ruff',
+      'markdownlint',
     })
 
     require('mason').setup()

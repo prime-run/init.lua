@@ -96,12 +96,19 @@ vim.api.nvim_create_autocmd('VimEnter', {
     vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding-bottom=0' }, {
       detach = true,
     })
+
+    vim.fn.jobstart({ 'kitten', '@', 'set-colors', 'background=#050E19' }, {
+      detach = true,
+    })
   end,
 })
 
 vim.api.nvim_create_autocmd('VimLeave', {
   callback = function()
     vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding=default' }, {
+      detach = true,
+    })
+    vim.fn.jobstart({ 'kitten', '@', 'set-colors', 'background=#050910' }, {
       detach = true,
     })
   end,
