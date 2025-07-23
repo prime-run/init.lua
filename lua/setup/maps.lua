@@ -3,11 +3,9 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.relativenumber = true
--- Enable mouse mode
-vim.opt.mouse = 'a'
--- it's already in the status line
+-- mouse mode
+-- vim.opt.mouse = 'a'
 vim.opt.showmode = false
--- sync clipboard
 -- vim.schedule(function()
 --   vim.opt.clipboard = 'unnamedplus'
 -- end)
@@ -24,7 +22,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
--- splits, :vsplit, :vs  | :split, :sp
+-- :vsplit, :vs  | :split, :sp
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 --  display certain whitespace characters in the editor.
@@ -36,9 +34,8 @@ vim.opt.inccommand = 'split'
 
 --cursor line
 vim.opt.cursorline = true
-vim.opt.scrolloff = 6 -- trying to use zz more!
+vim.opt.scrolloff = 3 -- trying to use zz more!
 
---clear highlights on search
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>pv', ':e .<CR>', { noremap = true, silent = true })
@@ -47,8 +44,8 @@ vim.keymap.set('n', '<leader>pp', vim.cmd.Oil)
 
 vim.keymap.set('n', '<Tab>', 'o<Esc>', { noremap = true, silent = true })
 
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -56,10 +53,10 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 -- vim.keymap.set('i', '<C-i>', '<C-u>', { remap = true })
 vim.keymap.set('i', '<C-v>', '<C-r>+', { remap = true, silent = true })
--- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 vim.keymap.set('v', '<leader>p', [["_dP]])
+vim.keymap.set('n', '<leader>Y', 'v$"+y')
+
 vim.keymap.set({ 'i', 'n' }, '<M-;>', '<Esc>$a;<Esc>o')
 
 vim.keymap.set('i', '<C-Right>', '<End>', { silent = true })

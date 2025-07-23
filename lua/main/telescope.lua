@@ -2,7 +2,7 @@ return {
   --
   -- TODO:
   -- -for leader sn -> if prefixed with ' ' opens oil in there
-  -- -manage plugins to be lazy loaded
+  -- single require mini stuff
   'nvim-telescope/telescope.nvim',
   -- event = 'VimEnter',
   tag = '0.1.8',
