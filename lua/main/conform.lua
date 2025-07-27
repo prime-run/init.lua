@@ -10,7 +10,7 @@ return {
         if vim.opt_local.modifiable:get() then
           vim.cmd.write()
         else
-          print "it's readonly"
+          print 'readonly buffer'
         end
       end,
       mode = 'n',
@@ -29,6 +29,8 @@ return {
 
     default_format_opts = {
       lsp_format = 'fallback',
+      async = true,
+      -- timeout_ms = 500,
     },
 
     format_on_save = { timeout_ms = 750, lsp_format = 'fallback' },
@@ -52,7 +54,10 @@ return {
       },
       json = { 'biome' },
       bash = { 'shfmt' },
-      yaml = { 'yamlfmt' }, -- config file under : /home/prime/.config
+      yaml = {
+        'yamlfmt',
+        --    env = { YAMLFIX_SEQUENCE_STYLE = "block_style",}
+      }, -- config file under : /home/prime/.config
       toml = { 'taplo' }, -- use TAPLO_CONFIG env to set global config file
       markdown = { 'markdownlint' },
       liquid = { 'prettier' },

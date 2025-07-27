@@ -40,8 +40,9 @@ return {
       providers = {
         snippets = {
           max_items = 4,
-          score_offset = -10,
+          -- score_offset = -10,
         },
+        codeium = { name = 'Codeium', module = 'codeium.blink', async = true },
       },
       -- default = { 'lsp', 'path', 'snippets', 'buffer' },
     },

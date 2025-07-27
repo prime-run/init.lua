@@ -96,6 +96,8 @@ return {
 
           highlights.LineNrAbove = { fg = '#017DC5' }
           highlights.LineNrBelow = { fg = '#017DC5' }
+          -- highlights.String = { fg = '#00a67d' }
+          -- highlights.property = { fg = '#00a67d' }
         end,
       }
 
