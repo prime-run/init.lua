@@ -35,22 +35,3 @@ function FocusWindowByID(win_id)
     print 'Invalid or missing window ID provided.'
   end
 end
-
-function GetNeovimTerminalWindows()
-  local terminal_windows = {}
-  local current_win_id = vim.api.nvim_get_current_win()
-
-  for _, win_id in ipairs(vim.api.nvim_list_wins()) do
-    local buf_id = vim.api.nvim_win_get_buf(win_id)
-    local buftype = vim.api.nvim_buf_get_option(buf_id, 'buftype')
-
-    if buftype == 'terminal' then
-      table.insert(terminal_windows, {
-        winnr = vim.api.nvim_win_get_number(win_id),
-        bufnr = buf_id,
-        active = (win_id == current_win_id),
-      })
-    end
-  end
-  return terminal_windows
-end

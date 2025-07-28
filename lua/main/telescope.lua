@@ -112,13 +112,22 @@ return {
       return buffers
     end
 
-    -- Jump to nth buffer in MRU list
     local function jump_to_buffer(n)
       local buffers = get_sorted_buffers()
       if #buffers >= n then
         vim.api.nvim_set_current_buf(buffers[n])
       end
     end
+
+    vim.api.nvim_create_user_command('Bjump', function(opts)
+      local n = tonumber(opts.args)
+      if n then
+        jump_to_buffer(n)
+      end
+    end, {
+      nargs = 1,
+      desc = 'Bjump to n',
+    })
 
     vim.keymap.set('n', '<leader>1', function()
       jump_to_buffer(1)

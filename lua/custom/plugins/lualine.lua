@@ -4,7 +4,7 @@ return {
   config = function()
     local lualine = require 'lualine'
     local colors = {
-      blue = '#2979FF',
+      blue = '#3d59a1',
       green = '#76FF03',
       violet = '#FF61EF',
       yellow = '#FFDA7B',
@@ -16,19 +16,19 @@ return {
       kitty = '#9ABBE6',
     }
 
-    local my_lualine_theme = {
+    local the_theme = {
       normal = {
-        a = { bg = colors.blue, fg = colors.bg, gui = 'bold' },
+        a = { bg = colors.blue, fg = 'white' },
         b = { bg = colors.kitty, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
       insert = {
-        a = { bg = colors.green, fg = colors.bg, gui = 'bold' },
+        a = { bg = colors.green, fg = colors.bg },
         b = { bg = colors.kitty, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
       visual = {
-        a = { bg = colors.violet, fg = colors.bg, gui = 'bold' },
+        a = { bg = colors.violet, fg = colors.bg },
         b = { bg = colors.green, fg = colors.bg },
         c = { bg = colors.bg, fg = colors.fg },
       },
@@ -51,13 +51,24 @@ return {
 
     lualine.setup {
       options = {
-        theme = my_lualine_theme,
+        theme = the_theme,
+        always_show_tabline = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = ' ', right = ' ' },
+        fmt = string.lower,
       },
+
+      extensions = { 'oil' },
       sections = {
         lualine_a = {
-          { 'mode', separator = { left = '', right = '' }, padding = 1 },
+          {
+            'mode',
+            separator = { left = '', right = '' },
+            padding = 1,
+            fmt = function(str)
+              return str:sub(1, 1)
+            end,
+          },
         },
         lualine_b = {
           {
@@ -67,8 +78,43 @@ return {
             padding = 1,
           },
         },
-        lualine_c = { 'lsp_status', 'diagnostics', 'branch', 'diff' },
-        lualine_x = { 'fileformat', 'filetype' },
+
+        lualine_c = {
+          {
+            'diagnostics',
+
+            sources = { 'nvim_diagnostic' },
+
+            sections = { 'error', 'warn', 'info', 'hint' },
+
+            diagnostics_color = {
+
+              error = 'DiagnosticError',
+              warn = 'DiagnosticWarn',
+              info = 'DiagnosticInfo',
+              hint = 'DiagnosticHint',
+            },
+            symbols = { error = '', warn = '', info = '', hint = '' },
+            colored = true,
+            update_in_insert = false,
+            always_visible = false,
+          },
+
+          {
+            'lsp_status',
+            icon = '',
+            symbols = {
+              spinner = { '󰝲', '', '' },
+              done = '󰄭',
+              separator = '   ',
+            },
+            -- List of LSP names to ignore (e.g., `null-ls`):
+            ignore_lsp = {},
+          },
+          'branch',
+          'diff',
+        },
+        lualine_x = { 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },

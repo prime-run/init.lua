@@ -3,7 +3,6 @@ return {
   config = function()
     require('mini.jump').setup {
       delay = {
-        -- just disable them all!
         highlight = 2500000000,
         idle_stop = 1000000000,
       },

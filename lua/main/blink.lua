@@ -2,7 +2,11 @@ return {
   'saghen/blink.cmp',
   version = '*',
   build = 'cargo build --release',
-  dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+  dependencies = {
+    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    'mikavilpas/blink-ripgrep.nvim',
+    'huijiro/blink-cmp-supermaven',
+  },
   opts = {
     snippets = { preset = 'luasnip' },
 
@@ -16,16 +20,31 @@ return {
       },
 
       ['Tab'] = nil,
-      ['<C-r>'] = {
+
+      ['<C-a>'] = {
         function(cmp)
           cmp.show { providers = { 'LSP' } }
         end,
       },
-      ['<M-n>'] = {
+
+      ['<C-r>'] = {
+        function()
+          require('blink-cmp').show { providers = { 'ripgrep' } }
+        end,
+      },
+
+      ['<M-s>'] = {
         function(cmp)
           cmp.show_signature()
         end,
       },
+
+      ['<M-a>'] = {
+        function()
+          require('blink-cmp').show { providers = { 'supermaven' } }
+        end,
+      },
+
       -- ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
       -- ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
       -- ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
@@ -36,19 +55,29 @@ return {
     --   nerd_font_variant = 'normal',
     -- },
 
+    accept = { auto_brackets = { enabled = true } },
     sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         snippets = {
           max_items = 4,
-          -- score_offset = -10,
+          score_offset = -10,
         },
-        codeium = { name = 'Codeium', module = 'codeium.blink', async = true },
+        ripgrep = {
+          module = 'blink-ripgrep',
+          name = 'rg',
+        },
+        supermaven = {
+          name = 'maven',
+          module = 'blink-cmp-supermaven',
+          async = true,
+          score_offset = -10,
+          max_items = 2,
+        },
       },
-      -- default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
     completion = {
-      -- ghost_text = {
-      --   enabled = true },
+      -- ghost_text = { enabled = true },
       list = {
         selection = { preselect = true, auto_insert = false },
       },
@@ -67,8 +96,9 @@ return {
           columns = {
             -- { 'label', 'label_description', gap = 1 },
             { 'label', 'label_description', gap = 1 },
-            { 'kind', 'source_name', gap = 1 },
-            -- { 'kind_icon', 'kind' },
+            --NOTE: kind is the longass name
+            { 'source_name', gap = 1 },
+            -- { 'kind_icon', 'kind', gap = 1 },
           },
         },
       },
@@ -98,10 +128,12 @@ return {
       keymap = { preset = 'inherit' },
       completion = { menu = { auto_show = true } },
     },
-    signature = { enabled = true, window = {
-      border = 'padded',
-      min_width = 15,
-    } },
+    signature = { enabled = true },
+
+    -- signature = { enabled = true, window = {
+    --   border = 'padded',
+    --   min_width = 15,
+    -- } },
   },
   opts_extend = { 'sources.default' },
 }
