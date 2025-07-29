@@ -55,7 +55,7 @@ return {
     --   nerd_font_variant = 'normal',
     -- },
 
-    accept = { auto_brackets = { enabled = true } },
+    -- accept = { auto_brackets = { enabled = true } },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {

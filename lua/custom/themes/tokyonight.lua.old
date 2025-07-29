@@ -23,6 +23,7 @@ return {
           local sec = '#CA001E'
           local prompts_drk = '#0F0F14'
 
+          -- highlights.Normal = { bg = '#020811' }
           highlights.TelescopePromptNormal = { fg = '#FFFFFF', bg = prompts }
           highlights.TelescopePromptBorder = { fg = prompts, bg = prompts }
           highlights.TelescopePromptTitle = {}
@@ -93,6 +94,8 @@ return {
             bg = 'NONE',
             fg = '#3D4267',
           }
+
+          -- Fidget
 
           highlights.LineNrAbove = { fg = '#017DC5' }
           highlights.LineNrBelow = { fg = '#017DC5' }

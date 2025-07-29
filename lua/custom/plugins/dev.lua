@@ -5,6 +5,8 @@ return {
     config = function()
       local agents = require 'agents'
       local opts = {
+        agent = 'gemini',
+        keep_focus = false,
         term = {
           position = 'right',
           width = 0.4,

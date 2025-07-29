@@ -2,7 +2,7 @@ return {
   'lewis6991/gitsigns.nvim',
   opts = {
     signs = {
-      add = { text = '' },
+      add = { text = '󰐕' },
       change = { text = '󰓡' },
       delete = { text = '󰆴' },
       topdelete = { text = '󰠙' },
@@ -50,6 +50,8 @@ return {
       map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
       map('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
       map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+      map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'git diff [W]ord' })
+      map('n', '<leader>hl', gitsigns.preview_hunk_inline, { desc = 'git preview hunk in[L]ine' })
       map('n', '<leader>hD', function()
         gitsigns.diffthis '@'
       end, { desc = 'git [D]iff against last commit' })
