@@ -6,7 +6,7 @@ return {
       local agents = require 'agents'
       local opts = {
         agent = 'gemini',
-        keep_focus = false,
+        keep_focus = true,
         term = {
           position = 'right',
           width = 0.4,
