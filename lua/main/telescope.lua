@@ -10,10 +10,10 @@ return {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', lazy = true, enabled = true },
+    { 'jvgrootveld/telescope-zoxide' },
   },
   config = function()
     -- local ignore_patterns = require('tmp').get_vimignore_patterns()
-
     require('telescope').setup {
       defaults = {
         horizontal_padding = 5,
@@ -24,26 +24,55 @@ return {
         --   mappings = {
         -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         file_ignore_patterns = {
-          'node_modules',
-          '.git',
-          '.png',
-          '.jpeg',
-          '.jpg',
-          '.webp',
-          '.gif',
-          '.gif',
-          '.apk',
-          '.mjs',
+          'node_modules/',
+          '.git/',
+          '__pycache__/',
+          '%.o',
+          '%.a',
+          '%.out',
+          '%.class',
+          '%.pdf',
+          '%.mkv',
+          '%.mp4',
+          '%.zip',
+          '%.jpg',
+          '%.jpeg',
+          '%.png',
+          '%.gif',
+          '%.webp',
         },
       },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        zoxide = {
+          prompt_title = 'dvd me',
+          mappings = {
+            ['<C-j>'] = {
+              action = function(selection)
+                vim.cmd.tcd(selection.path)
+                vim.schedule(function()
+                  vim.cmd 'e .'
+                end)
+              end,
+            },
+            -- ["<C-s>"] = { action = z_utils.create_basic_command("split") },
+            -- ["<C-v>"] = { action = z_utils.create_basic_command("vsplit") },
+            -- ['<C-e>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'edit' },
+            -- ["<C-f>"] = {
+            --   keepinsert = true,
+            --   action = function(selection)
+            --     builtin.find_files({ cwd = selection.path })
+            --   end,
+            -- },
+          },
+        },
       },
     }
 
-    pcall(require('telescope').load_extension, 'ui-select')
+    local t = require 'telescope'
+    pcall(t.load_extension, 'ui-select')
 
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -55,6 +84,7 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>fc', t.extensions.zoxide.list)
     vim.keymap.set('n', '<leader>sq', function()
       builtin.diagnostics(require('telescope.themes').get_ivy {
         layout_config = {

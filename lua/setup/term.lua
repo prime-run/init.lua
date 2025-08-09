@@ -54,4 +54,4 @@ local function enable_maps() -- TODO: get them outta function when plugin dev is
   vim.keymap.set('n', '<leader>tt', toggle_terminal)
 end
 
-enable_maps()
+-- enable_maps()

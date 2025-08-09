@@ -6,15 +6,13 @@ return {
       local agents = require 'agents'
       local opts = {
         agent = 'gemini',
-        keep_focus = true,
+        keep_focus = false,
         term = {
           position = 'right',
-          width = 0.4,
+          width = 0.55,
         },
       }
       agents.setup(opts)
-      -- agents.create_float { width = 0.8, height = 0.5 }
-      -- agents.create_split { width = 0.3, position = 'left' }
     end,
   },
 }

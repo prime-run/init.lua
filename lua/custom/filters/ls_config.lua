@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>fc', function()
+vim.keymap.set('n', '<leader>fhc', function()
   require('telescope.builtin').find_files {
     cwd = vim.fn.expand '~/.config',
     find_command = { 'fd', '.', '--type', 'd', '--max-depth', '1', '--hidden' },
