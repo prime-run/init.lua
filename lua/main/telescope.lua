@@ -10,7 +10,37 @@ return {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', lazy = true, enabled = true },
-    { 'jvgrootveld/telescope-zoxide' },
+    {
+      'jvgrootveld/telescope-zoxide',
+      opts = {
+        -- local z_utils = require("telescope._extensions.zoxide.utils"),
+        prompt_title = 'dvd me',
+        -- mappings = {
+        --   default = {
+        --     action = function(selection)
+        --       vim.cmd.cd(selection.path)
+        --     end,
+        --     after_action = function(selection)
+        --       vim.notify('Directory changed to ' .. selection.path)
+        --     end,
+        --   },
+        --   ['<C-s>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'split' },
+        --   ['<C-v>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'vsplit' },
+        --   ['<C-e>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'edit' },
+        --   ['<C-f>'] = {
+        --     keepinsert = true,
+        --     action = function(selection)
+        --       builtin.find_files { cwd = selection.path }
+        --     end,
+        --   },
+        --   ['<C-t>'] = {
+        --     action = function(selection)
+        --       vim.cmd.tcd(selection.path)
+        --     end,
+        --   },
+        -- },
+      },
+    },
   },
   config = function()
     -- local ignore_patterns = require('tmp').get_vimignore_patterns()
@@ -60,10 +90,10 @@ return {
             -- ["<C-s>"] = { action = z_utils.create_basic_command("split") },
             -- ["<C-v>"] = { action = z_utils.create_basic_command("vsplit") },
             -- ['<C-e>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'edit' },
-            -- ["<C-f>"] = {
+            -- ['<C-f>'] = {
             --   keepinsert = true,
             --   action = function(selection)
-            --     builtin.find_files({ cwd = selection.path })
+            --     builtin.find_files { cwd = selection.path }
             --   end,
             -- },
           },

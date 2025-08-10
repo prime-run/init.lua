@@ -21,12 +21,6 @@ return {
 
       ['Tab'] = nil,
 
-      ['<C-a>'] = {
-        function(cmp)
-          cmp.show { providers = { 'LSP' } }
-        end,
-      },
-
       ['<C-r>'] = {
         function()
           require('blink-cmp').show { providers = { 'ripgrep' } }

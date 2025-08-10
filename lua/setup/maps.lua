@@ -3,14 +3,13 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.relativenumber = true
--- mouse mode
 -- vim.opt.mouse = 'a'
 vim.opt.showmode = false
 -- vim.schedule(function()
 --   vim.opt.clipboard = 'unnamedplus'
 -- end)
 -- vim.opt.breakindent = true
-vim.opt.tabstop = 2
+vim.o.tabstop = 2
 vim.o.swapfile = false
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -23,11 +22,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes:1'
 vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
--- :vsplit, :vs  | :split, :sp
+vim.opt.timeoutlen = 250
 vim.opt.splitright = true
 vim.opt.splitbelow = true
---  display certain whitespace characters in the editor.
 --  See `:help 'list' and `:help 'listchars'`
 vim.opt.list = false
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
@@ -36,7 +33,7 @@ vim.opt.inccommand = 'split'
 
 --cursor line
 vim.opt.cursorline = true
-vim.opt.scrolloff = 3 -- trying to use zz more!
+vim.opt.scrolloff = 5 -- trying to use zz more!
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -54,7 +51,11 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 -- vim.keymap.set('i', '<C-i>', '<C-u>', { remap = true })
-vim.keymap.set('i', '<C-v>', '<C-r>+', { remap = true, silent = true })
+-- vim.keymap.set('i', '<C-v>', '<C-r>+', { remap = true, silent = true })
+
+vim.keymap.set('i', '<c-a><c-a>', '<C-o>$', { noremap = true, silent = true })
+vim.keymap.set('i', '<c-i><c-i>', '<C-o>^', { noremap = true, silent = true })
+
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('v', '<leader>p', [["_dP]])
 vim.keymap.set('n', '<leader>Y', 'v$"+y')
@@ -101,27 +102,23 @@ vim.api.nvim_create_autocmd('VimEnter', {
     vim.fn.jobstart({ 'alacritty', 'msg', 'config', '--window-id', '-1', 'window.padding.y=0' }, {
       detach = true,
     })
-    -- vim.fn.jobstart { 'alacritty', 'msg', 'config', 'window.padding.y=1' }
-    -- vim.fn.jobstart({ 'kitten', '@', 'set-colors', 'background=#050E19' }, {
-    --   detach = true,
-    -- })
+
+    vim.fn.jobstart({ 'alacritty', 'msg', 'config', '--window-id', '-1', 'window.padding.x=0' }, {
+      detach = true,
+    })
   end,
 })
 
 vim.api.nvim_create_autocmd('VimLeave', {
   callback = function()
-    -- vim.fn.jobstart({ 'kitty', '@', 'set-spacing', 'padding=20' }, {
-    -- detach = true,
-    -- })
-
     -- alacritty msg config --window-id -1 window.padding.y=1
     vim.fn.jobstart({ 'alacritty', 'msg', 'config', '--window-id', '-1', 'window.padding.y=20' }, {
       detach = true,
     })
 
-    -- vim.fn.jobstart({ 'kitten', '@', 'set-colors', 'background=#050910' }, {
-    --   detach = true,
-    -- })
+    vim.fn.jobstart({ 'alacritty', 'msg', 'config', '--window-id', '-1', 'window.padding.x=20' }, {
+      detach = true,
+    })
   end,
 })
 
