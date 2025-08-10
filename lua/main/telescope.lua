@@ -87,6 +87,16 @@ return {
                 end)
               end,
             },
+
+            ['<CR>'] = {
+              action = function(selection)
+                vim.cmd.tcd(selection.path)
+                vim.schedule(function()
+                  vim.cmd 'e .'
+                end)
+              end,
+            },
+
             -- ["<C-s>"] = { action = z_utils.create_basic_command("split") },
             -- ["<C-v>"] = { action = z_utils.create_basic_command("vsplit") },
             -- ['<C-e>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'edit' },
@@ -114,7 +124,11 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader>fc', t.extensions.zoxide.list)
+    vim.keymap.set('n', '<leader>fc', function()
+      t.extensions.zoxide.list(require('telescope.themes').get_ivy {})
+    end, { desc = '[F]ind [C]d history' })
+
+    --
     vim.keymap.set('n', '<leader>sq', function()
       builtin.diagnostics(require('telescope.themes').get_ivy {
         layout_config = {

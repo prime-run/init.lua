@@ -73,15 +73,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { silent = true })
 -- vim.keymap.set('n', '<Esc>0', '^')
 vim.keymap.set('n', '<M-a>', '@a')
 
-vim.keymap.set('n', '<leader>rep', function()
-  local replacement = vim.fn.escape(vim.fn.getreg '.', '/\\&')
-  vim.cmd('keeppatterns %s//' .. replacement .. '/g')
-end, { desc = 'Replace all with last change' })
-
--- vim.keymap.set('n', '<leader>colt', function()
---   vim.cmd.colorscheme 'tokyonight-moon'
--- end, { desc = 'Color Tokyo' })
-
 vim.keymap.set('i', '<C-c>', '<C-[><Esc>', { noremap = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
