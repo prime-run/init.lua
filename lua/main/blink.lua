@@ -5,7 +5,7 @@ return {
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     'mikavilpas/blink-ripgrep.nvim',
-    'huijiro/blink-cmp-supermaven',
+    -- 'huijiro/blink-cmp-supermaven',
   },
   opts = {
     snippets = { preset = 'luasnip' },
@@ -33,11 +33,11 @@ return {
         end,
       },
 
-      ['<M-a>'] = {
-        function()
-          require('blink-cmp').show { providers = { 'supermaven' } }
-        end,
-      },
+      -- ['<M-a>'] = {
+      --   function()
+      --     require('blink-cmp').show { providers = { 'supermaven' } }
+      --   end,
+      -- },
 
       -- ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
       -- ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
@@ -61,13 +61,13 @@ return {
           module = 'blink-ripgrep',
           name = 'rg',
         },
-        supermaven = {
-          name = 'maven',
-          module = 'blink-cmp-supermaven',
-          async = true,
-          score_offset = -10,
-          max_items = 2,
-        },
+        -- supermaven = {
+        --   name = 'maven',
+        --   module = 'blink-cmp-supermaven',
+        --   async = true,
+        --   score_offset = -10,
+        --   max_items = 2,
+        -- },
       },
     },
     completion = {

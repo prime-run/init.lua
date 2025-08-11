@@ -42,7 +42,7 @@ return {
         gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'git [r]eset hunk' })
       -- n mode
-      map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
+      map('n', '<leader>hsh', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
       map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
       map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
       map('n', '<leader>hu', gitsigns.stage_hunk, { desc = 'git [u]ndo stage hunk' })
@@ -52,6 +52,11 @@ return {
       map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
       map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'git diff [W]ord' })
       map('n', '<leader>hl', gitsigns.preview_hunk_inline, { desc = 'git preview hunk in[L]ine' })
+      --
+      map('n', '<leader>hsl', function()
+        gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line '.' }
+      end, { desc = 'git ' })
+      --
       map('n', '<leader>hD', function()
         gitsigns.diffthis '@'
       end, { desc = 'git [D]iff against last commit' })
