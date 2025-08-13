@@ -17,9 +17,10 @@ require('lazy').setup {
   { 'folke/lazydev.nvim', ft = 'lua', opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } } },
   { import = 'main' },
   { import = 'custom.plugins' },
-  { import = 'custom.themes' },
+  -- { import = 'custom.themes' },
   -- <leader>sh snvim help
 }
+vim.cmd [[colorscheme prime-night]]
 
 --  `modeline`.  `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
