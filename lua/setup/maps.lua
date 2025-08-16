@@ -126,3 +126,9 @@ vim.keymap.set({ 'i', 's' }, '<Tab>', '<Tab>', { noremap = true, silent = true, 
 --     end
 --   end,
 -- })
+--
+
+vim.keymap.set('n', '<leader>colt', function()
+  vim.api.nvim_set_hl(0, 'LocalBg', { bg = '#131414' })
+  vim.wo.winhighlight = 'Normal:LocalBg'
+end)

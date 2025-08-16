@@ -1,4 +1,3 @@
--- just pacman -Sy rust analyzer
 return {
   'mrcjkb/rustaceanvim',
   version = '^6',
