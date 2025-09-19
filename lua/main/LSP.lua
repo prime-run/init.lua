@@ -180,7 +180,6 @@ return {
       'prettier',
       'yamlfmt',
       'shfmt',
-      'biome',
       'markdownlint',
     })
 

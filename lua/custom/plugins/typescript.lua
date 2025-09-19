@@ -9,7 +9,6 @@ return {
       'neovim/nvim-lspconfig',
     },
     config = function()
-      -- Merge capabilities properly , it really shouldnt work but it does lol
       local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('blink.cmp').get_lsp_capabilities(), {
         workspace = {
           didChangeWatchedFiles = { dynamicRegistration = true },
@@ -35,6 +34,35 @@ return {
           map('n', '<leader>tai', '<cmd>TSToolsAddMissingImports<CR>', 'Add Missing Imports')
           map('n', '<leader>trf', '<cmd>TSToolsRenameFile<CR>', 'Rename File')
           -- map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
+
+          local biome_group = vim.api.nvim_create_augroup('biome-fix', { clear = false })
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            group = biome_group,
+            buffer = bufnr,
+            callback = function()
+              if not vim.opt_local.modifiable:get() then
+                return
+              end
+              local has_biome = false
+              for _, c in pairs(vim.lsp.get_clients { bufnr = bufnr }) do
+                if c.name == 'biome' then
+                  has_biome = true
+                  break
+                end
+              end
+              if not has_biome then
+                return
+              end
+              pcall(vim.lsp.buf.code_action, {
+                context = { only = { 'source.fixAll' } },
+                apply = true,
+              })
+              pcall(vim.lsp.buf.code_action, {
+                context = { only = { 'source.organizeImports' } },
+                apply = true,
+              })
+            end,
+          })
         end,
 
         settings = {

@@ -1,0 +1,104 @@
+return {
+  { -- Linting
+    'mfussenegger/nvim-lint',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      local lint = require 'lint'
+
+      -- Avoid ENOENT (e.g., jsonlint) by disabling all default linters by default.
+      -- We'll only lint when a mapping exists for the current filetype.
+      lint.linters_by_ft = {}
+
+      -- local pattern = '([^:]+):(%d+):(%d+): %[([^%]]+)%] (.+)'
+      -- local groups = { 'lnum', 'col', 'code', 'message' }
+      -- local rumdl_parser = require('lint.parser').from_pattern(
+      --   pattern,
+      --   groups,
+      --   {}, --TODO: maybe add severity maps later?
+      --   { source = 'rumdl', severity = vim.diagnostic.severity.WARN }
+      -- )
+      --
+      -- lint.linters.rumdl = {
+      --   cmd = 'rumdl',
+      --   stdin = false,
+      --   append_fname = true,
+      --   args = { 'check' },
+      --   stream = 'stdout',
+      --   ignore_exitcode = true,
+      --   env = nil,
+      --   parser = rumdl_parser,
+      -- }
+      --
+
+      -- lint.linters.rumdl = {
+      --   cmd = 'rumdl',
+      --   stdin = false,
+      --   append_fname = true,
+      --   args = { 'check' },
+      --   stream = 'stdout',
+      --   ignore_exitcode = true,
+      --   env = nil,
+      --   parser = require('lint.parser').from_pattern('([^:]+):(%d+):(%d+): %[([^%]]+)%] (.+)', {
+      --     'file',
+      --     'lnum',
+      --     'col',
+      --     'code',
+      --     'message',
+      --   }, {}, {
+      --     source = 'rumdl',
+      --     severity = vim.diagnostic.severity.WARN,
+      --   }),
+      -- }
+
+      -- lint.linters_by_ft = {
+      --   markdown = { 'rumdl', 'markdownlint' },
+      -- }
+
+      -- {
+      --   clojure = { "clj-kondo" },
+      --   dockerfile = { "hadolint" },
+      --   inko = { "inko" },
+      --   janet = { "janet" },
+      --   json = { "jsonlint" },
+      --   markdown = { "vale" },
+      --   rst = { "vale" },
+      --   ruby = { "ruby" },
+      --   terraform = { "tflint" },
+      --   text = { "vale" }
+      -- }
+      -- lint.linters_by_ft = {
+      --   javascript = { 'biomejs' },
+      --   typescript = { 'biomejs' },
+      --   javascriptreact = { 'biomejs' },
+      --   typescriptreact = { 'biomejs' },
+      -- }
+
+      -- lint.linters_by_ft['clojure'] = nil
+      -- lint.linters_by_ft['dockerfile'] = nil
+      -- lint.linters_by_ft['inko'] = nil
+      -- lint.linters_by_ft['janet'] = nil
+      -- -- lint.linters_by_ft['json'] = nil
+      -- -- lint.linters_by_ft['markdown'] = nil
+      -- -- lint.linters_by_ft['rst'] = nil
+      -- lint.linters_by_ft['ruby'] = nil
+      -- lint.linters_by_ft['terraform'] = nil
+      -- lint.linters_by_ft['text'] = nil
+
+      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+        group = lint_augroup,
+        callback = function()
+          if not vim.opt_local.modifiable:get() then
+            return
+          end
+          local bufnr = vim.api.nvim_get_current_buf()
+          local ft = vim.bo[bufnr].filetype
+          local configured = lint.linters_by_ft[ft]
+          if configured and #configured > 0 then
+            lint.try_lint()
+          end
+        end,
+      })
+    end,
+  },
+}
