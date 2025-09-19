@@ -5,7 +5,7 @@ return {
     config = function()
       local agents = require 'agents'
       local opts = {
-        agent = 'gemini',
+        agent = 'gemini -m gemini-3-flash-preview',
         keep_focus = false,
         term = {
           position = 'right',

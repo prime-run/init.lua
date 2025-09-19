@@ -129,6 +129,13 @@ return {
       lua_ls = {
         settings = {
           Lua = {
+            workspace = {
+              library = {
+                vim.fn.expand '%:p:h' .. '~/Projects/rust/evremap/examples/primemap.d.lua',
+                -- or: vim.fn.getcwd() .. "/examples"
+              },
+              checkThirdParty = false,
+            },
             completion = {
               callSnippet = 'Replace',
             },
@@ -171,6 +178,7 @@ return {
       gopls = {},
 
       taplo = {},
+      biome = {},
       tailwindcss = {},
     }
 
@@ -180,14 +188,13 @@ return {
       'prettier',
       'yamlfmt',
       'shfmt',
-      'biome',
       'markdownlint',
     })
 
     require('mason').setup()
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    local lspconfig = require 'lspconfig'
+    -- local lspconfig = require 'lspconfig'
 
     for name, config in pairs(servers) do
       if type(config) ~= 'table' then
@@ -196,7 +203,11 @@ return {
       config = vim.tbl_deep_extend('force', {}, {
         capabilities = capabilities,
       }, config)
-      lspconfig[name].setup(config)
+
+      -- lspconfig[name].setup(config)
+      -- good
+      vim.lsp.config(name, config)
+      vim.lsp.enable(name)
     end
   end,
 }

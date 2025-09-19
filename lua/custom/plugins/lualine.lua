@@ -10,7 +10,7 @@ return {
       yellow = '#FFDA7B',
       red = '#FF1744',
       fg = '#c3ccdc',
-      bg = '#112638',
+      bg = '#000000',
       inactive_bg = '#2c3043',
       semilightgray = '#6c6f93',
       kitty = '#9ABBE6',

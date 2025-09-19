@@ -13,22 +13,4 @@ return {
     },
     log_level = 'info',
   },
-
-  --   'olimorris/codecompanion.nvim',
-  --   opts = {
-  --
-  --     adapters = {
-  --       anthropic = function()
-  --         return require('codecompanion.adapters').extend('anthropic', {
-  --           env = {
-  --             api_key = 'MY_OTHER_ANTHROPIC_KEY',
-  --           },
-  --         })
-  --       end,
-  --     },
-  --   },
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-treesitter/nvim-treesitter',
-  --   },
 }
