@@ -171,6 +171,7 @@ return {
       gopls = {},
 
       taplo = {},
+      biome = {},
       tailwindcss = {},
     }
 
@@ -186,7 +187,7 @@ return {
     require('mason').setup()
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    local lspconfig = require 'lspconfig'
+    -- local lspconfig = require 'lspconfig'
 
     for name, config in pairs(servers) do
       if type(config) ~= 'table' then
@@ -195,7 +196,11 @@ return {
       config = vim.tbl_deep_extend('force', {}, {
         capabilities = capabilities,
       }, config)
-      lspconfig[name].setup(config)
+
+      -- lspconfig[name].setup(config)
+      -- good
+      vim.lsp.config(name, config)
+      vim.lsp.enable(name)
     end
   end,
 }
