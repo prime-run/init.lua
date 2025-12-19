@@ -54,8 +54,8 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         snippets = {
-          max_items = 4,
-          score_offset = -10,
+          max_items = 2,
+          -- score_offset = -10,
         },
         ripgrep = {
           module = 'blink-ripgrep',

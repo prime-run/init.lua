@@ -4,7 +4,7 @@ return {
     { 'williamboman/mason.nvim', opts = {} },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-    { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
+    -- { 'https://git.sr.ht/~whynothugo/lsp_lines.nvim' },
     { 'j-hui/fidget.nvim', opts = {} },
     { 'saghen/blink.cmp' },
   },
@@ -19,8 +19,8 @@ return {
 
         local tbuiltin = require 'telescope.builtin'
 
-        map('gd', tbuiltin.lsp_definitions, '[G]oto [D]efinition')
-        map('<leader>gr', tbuiltin.lsp_references, '[G]oto [R]eferences')
+        map('gd', tbuiltin.lsp_definitions, '')
+        map('<leader>gr', tbuiltin.lsp_references, '')
         map('gI', tbuiltin.lsp_implementations, '[G]oto [I]mplementation')
         map('<leader>dt', tbuiltin.lsp_type_definitions, '[D]efinition [T]ype')
         map('<leader>ds', tbuiltin.lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -31,6 +31,11 @@ return {
         map('K', function()
           require('pretty_hover').hover()
         end, 'Pretty Hover')
+        -- vim.keymap.set('n', 'K', function()
+        --   vim.lsp.buf.hover {
+        --     border = 'single',
+        --   }
+        -- end)
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -108,7 +113,7 @@ return {
         scope = 'cursor',
       }
       vim.diagnostic.open_float(nil, opts)
-    end, { desc = 'Show diagnostic under cursor' })
+    end)
 
     local signs = { Error = '', Warn = '', Hint = '󰌶', Info = '' }
     for type, icon in pairs(signs) do
@@ -180,6 +185,24 @@ return {
       taplo = {},
       biome = {},
       tailwindcss = {},
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            imports = {
+              granularity = { group = 'module' },
+              prefix = 'self',
+            },
+            cargo = { buildScripts = { enable = true } },
+            procMacro = { enable = true },
+            inlayHints = {
+              lifetimeElisionHints = {
+                enable = false,
+                useParameterNames = true,
+              },
+            },
+          },
+        },
+      },
     }
 
     local ensure_installed = vim.tbl_keys(servers)
@@ -205,7 +228,6 @@ return {
       }, config)
 
       -- lspconfig[name].setup(config)
-      -- good
       vim.lsp.config(name, config)
       vim.lsp.enable(name)
     end
