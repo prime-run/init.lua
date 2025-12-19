@@ -69,6 +69,8 @@ return {
           '%.jpeg',
           '%.png',
           '%.gif',
+          '%.mp3',
+          '%.wav',
           '%.webp',
         },
       },

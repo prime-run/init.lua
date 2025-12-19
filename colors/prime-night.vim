@@ -1,4 +1,4 @@
-highlight Normal guifg=#c8d3f5 guibg=NONE guisp=NONE blend=NONE gui=NONE
+highlight Normal guifg=#c8d3f5 guibg=BLACK guisp=NONE blend=NONE gui=NONE
 highlight! link Ignore Normal
 highlight! link LspKindFile Normal
 highlight! link NvimSpacing Normal
@@ -765,7 +765,7 @@ highlight! link luaError Error
 highlight! link luaParenError Error
 highlight ErrorMsg guifg=#c53b53 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight! link NvimInvalidSpacing ErrorMsg
-highlight FloatBorder guifg=#0f0f14 guibg=#0f0f14 guisp=NONE blend=NONE gui=NONE
+highlight FloatBorder guifg=#1F1F1F guibg=#1F1F1F guisp=NONE blend=NONE gui=NONE
 highlight! link MiniClueBorder FloatBorder
 highlight! link MiniFilesBorder FloatBorder
 highlight! link MiniNotifyBorder FloatBorder
@@ -937,7 +937,7 @@ highlight! link GitSignsCurrentLineBlame NonText
 highlight! link TelescopePreviewHyphen NonText
 highlight! link TelescopePromptCounter NonText
 highlight! link TelescopeResultsDiffUntracked NonText
-highlight NormalFloat guifg=#a0c0d0 guibg=#0f0f14 guisp=NONE blend=NONE gui=NONE
+highlight NormalFloat guifg=#a0c0d0 guibg=#1F1F1F guisp=NONE blend=NONE gui=NONE
 highlight! link BlinkCmpDocSeparator NormalFloat
 highlight! link MiniAnimateNormalFloat NormalFloat
 highlight! link MiniClueDescSingle NormalFloat
@@ -1319,5 +1319,13 @@ highlight! link LspKindVariable @variable
 highlight! link @lsp.type.generic @variable
 highlight! link @lsp.type.namespace.python @variable
 highlight! link @lsp.typemod.variable.injected @variable
+highlight TelescopeResultsBorder guibg=#1b1b1b guifg=#1b1b1b 
+highlight TelescopeResultsNormal guibg=#1b1b1b 
+highlight BlinkCmpMenu guibg=#1F1F1F 
+highlight BlinkCmpMenuBorder guibg=#1F1F1F
+highlight BlinkCmpDoc guibg=#1F1F1F
+highlight BlinkCmpDocBorder guibg=#1F1F1F
+highlight BlinkCmpSource guibg=None
+
 set background=dark
 let g:colors_name="prime-night"

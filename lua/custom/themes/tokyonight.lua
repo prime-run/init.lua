@@ -19,7 +19,7 @@ return {
         on_highlights = function(highlights)
           local prompts = '#1A1A22'
           local mid = '#000000'
-          local darkest = '#05050A'
+          local darkest = '#ffffff'
           local sec = '#CA001E'
           local prompts_drk = '#0F0F14'
 
@@ -35,8 +35,9 @@ return {
           highlights.TelescopePreviewBorder = { fg = prompts, bg = prompts }
           highlights.TelescopePreviewTitle = {}
 
-          highlights.TelescopeResultsNormal = { fg = '#A0C0D0', bg = darkest }
-          highlights.TelescopeResultsBorder = { fg = darkest, bg = darkest }
+          highlights.TelescopeResultsNormal = { bg = '#1F1F1F' }
+          highlights.TelescopeResultsBorder = { bg = '#1F1F1F' }
+
           highlights.TelescopeResultsTitle = {}
 
           highlights.TelescopeSelection = { fg = '#FFFFFF', bg = '#252530' }
@@ -82,8 +83,8 @@ return {
           highlights.DiagnosticHint = { fg = '#009955' }
 
           --------global
-          highlights.FloatBorder = { fg = prompts_drk, bg = prompts_drk }
-          highlights.NormalFloat = { fg = '#A0C0D0', bg = prompts_drk }
+          highlights.FloatBorder = { fg = '#1F1F1F', bg = '#1F1F1F' }
+          highlights.NormalFloat = { fg = '#1F1F1F', bg = '#1F1F1F' }
 
           highlights.DiagnosticUnnecessary = {
             fg = '#000000',

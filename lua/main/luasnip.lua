@@ -1,15 +1,17 @@
 return {
   'L3MON4D3/LuaSnip',
-  version = '*',
+  version = 'v2.*',
   build = 'make install_jsregexp',
-  dependencies = {
-    'rafamadriz/friendly-snippets',
+  opts = {
+    history = false,
+    require('luasnip.loaders.from_lua').load {
+      paths = { vim.fn.expand '~/.config/nvim/lua/custom/filters' },
+    },
   },
-  config = function()
-    local luasnip = require 'luasnip'
-    luasnip.config.setup {
-      history = false,
-    }
-    require('luasnip.loaders.from_vscode').lazy_load()
-  end,
+  vim.keymap.set({ 'i', 's' }, '<C-l>', function()
+    require('luasnip').jump(1)
+  end, { silent = true }),
+  vim.keymap.set({ 'i', 's' }, '<C-h>', function()
+    require('luasnip').jump(-1)
+  end, { silent = true }),
 }
