@@ -129,6 +129,13 @@ return {
       lua_ls = {
         settings = {
           Lua = {
+            workspace = {
+              library = {
+                vim.fn.expand '%:p:h' .. '~/Projects/rust/evremap/examples/primemap.d.lua',
+                -- or: vim.fn.getcwd() .. "/examples"
+              },
+              checkThirdParty = false,
+            },
             completion = {
               callSnippet = 'Replace',
             },
